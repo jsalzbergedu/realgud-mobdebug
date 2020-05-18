@@ -14,15 +14,15 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-;;  `realgud--lldb' Main interface to lldb via Emacs
+;;  `realgud:mobdebug' Main interface to mobdebug via Emacs
 (require 'load-relative)
 (require 'realgud)
-(require-relative-list '("core" "track-mode") "realgud--lldb-")
+(require-relative-list '("core" "track-mode") "realgud:mobdebug-")
 
 ;; This is needed, or at least the docstring part of it is needed to
 ;; get the customization menu to work in Emacs 25.
-(defgroup realgud--lldb nil
-  "The realgud interface to lldb"
+(defgroup realgud:mobdebug nil
+  "The realgud interface to mobdebug"
   :group 'realgud
   :version "25.1")
 
@@ -30,17 +30,17 @@
 ;; User definable variables
 ;;
 
-(defcustom realgud--lldb-command-name
-  "lldb"
+(defcustom realgud:mobdebug-command-name
+  "mobdebug"
   "File name for executing the and command options.
 This should be an executable on your path, or an absolute file name."
   :type 'string
-  :group 'realgud--lldb)
+  :group 'realgud:mobdebug)
 
-(declare-function realgud--lldb-track-mode     'realgud--lldb-track-mode)
+(declare-function realgud:mobdebug-track-mode     'realgud:mobdebug-track-mode)
 (declare-function realgud-command              'realgud-send)
-(declare-function realgud--lldb-parse-cmd-args 'realgud--lldb-core)
-(declare-function realgud--lldb-query-cmdline  'realgud--lldb-core)
+(declare-function realgud:mobdebug-parse-cmd-args 'realgud:mobdebug-core)
+(declare-function realgud:mobdebug-query-cmdline  'realgud:mobdebug-core)
 (declare-function realgud:run-process          'realgud-run)
 (declare-function realgud:flatten              'realgud-utils)
 (declare-function realgud:remove-ansi-schmutz  'realgud-utils)
@@ -50,8 +50,8 @@ This should be an executable on your path, or an absolute file name."
 ;;
 
 ;;;###autoload
-(defun realgud--lldb (&optional opt-cmd-line no-reset)
-  "Invoke the lldb debugger and start the Emacs user interface.
+(defun realgud:mobdebug (&optional opt-cmd-line no-reset)
+  "Invoke the mobdebug debugger and start the Emacs user interface.
 
 OPT-CMD-LINE is treated like a shell string; arguments are
 tokenized by `split-string-and-unquote'.
@@ -65,21 +65,21 @@ marginal icons is reset. See `loc-changes-clear-buffer' to clear
 fringe and marginal icons.
 "
   (interactive)
-  (let* ((cmd-str (or opt-cmd-line (realgud--lldb-query-cmdline "lldb")))
+  (let* ((cmd-str (or opt-cmd-line (realgud:mobdebug-query-cmdline "")))
 	 (cmd-args (split-string-and-unquote cmd-str))
-	 (parsed-args (realgud--lldb-parse-cmd-args cmd-args))
+	 (parsed-args (realgud:mobdebug-parse-cmd-args cmd-args))
 	 (script-args (caddr parsed-args))
 	 (script-name (car script-args))
 	 (parsed-cmd-args
 	  (cl-remove-if 'nil (realgud:flatten parsed-args)))
-	 (cmd-buf (realgud:run-process realgud--lldb-command-name
+	 (cmd-buf (realgud:run-process realgud:mobdebug-command-name
 				       script-name parsed-cmd-args
-				       'realgud--lldb-minibuffer-history
+				       'realgud:mobdebug-minibuffer-history
 				       nil))
 	 )
     (if cmd-buf
 	(with-current-buffer cmd-buf
-	  (set (make-local-variable 'realgud--lldb-file-remap)
+	  (set (make-local-variable 'realgud:mobdebug-file-remap)
 	       (make-hash-table :test 'equal))
 	  (realgud:remove-ansi-schmutz)
 	  )
@@ -87,7 +87,7 @@ fringe and marginal icons.
     )
   )
 
-(defalias 'lldb 'realgud--lldb)
+(defalias 'mobdebug 'realgud:mobdebug)
 
 (provide-me "realgud-")
 

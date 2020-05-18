@@ -1,6 +1,6 @@
 dnl FIXME: pick up from realgud.el
-AC_INIT(realgud-lldb, 1.0.2,)
-AC_CONFIG_SRCDIR(lldb/lldb.el)
+AC_INIT(realgud-mobdebug, 1.0.2,)
+AC_CONFIG_SRCDIR(mobdebug/mobdebug.el)
 AM_INIT_AUTOMAKE([foreign])
 AM_MAINTAINER_MODE
 
@@ -49,7 +49,7 @@ AM_CONDITIONAL(INSTALL_EMACS_LISP, test "x$lispdir_realgud" != "x")
 
 AC_CONFIG_FILES([Makefile \
                  common.mk \
-		 lldb/Makefile \
+		 mobdebug/Makefile \
 		 test/Makefile \
 		 ])
 AC_OUTPUT

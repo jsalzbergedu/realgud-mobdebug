@@ -1,4 +1,4 @@
-(package-file "realgud-lldb.el")
+(package-file "realgud-mobdebug.el")
 
 (source gnu)
 (source melpa)

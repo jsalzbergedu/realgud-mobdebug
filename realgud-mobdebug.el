@@ -1,10 +1,10 @@
-;;; realgud-lldb.el --- Realgud front-end to lldb -*- lexical-binding: t -*-
+;;; realgud-mobdebug.el --- Realgud front-end to lldb -*- lexical-binding: t -*-
 
 ;; Author: Rocky Bernstein <rocky@gnu.org>
 ;; Version: 1.0.2
 ;; Package-Type: multi
 ;; Package-Requires: ((load-relative "1.3.1") (realgud "1.5.0") (emacs "25"))
-;; URL: http://github.com/realgud/realgud-lldb
+;; URL: http://github.com/realgud/realgud-mobdebug
 ;; Compatibility: GNU Emacs 25.x
 
 ;; Copyright (C) 2015, 2016, 2019 Free Software Foundation, Inc
@@ -26,8 +26,8 @@
 
 ;;; Commentary:
 
-;; realgud support for the LLVM's debugger lldb
-;; See https://lldb.llvm.org/
+;; realgud support for the LLVM's debugger mobdebug
+;; See https://mobdebug.llvm.org/
 
 ;;; Code:
 
@@ -37,13 +37,13 @@
 
 (require 'load-relative)
 
-(defgroup realgud-lldb  nil
-  "Realgud interface to lldb"
+(defgroup realgud-mobdebug nil
+  "Realgud interface to mobdebug"
   :group 'realgud
   :version "25.1")
 
-(require-relative-list '( "./lldb/lldb" ) "realgud-")
+(require-relative-list '( "./mobdebug/mobdebug" ) "realgud-")
 
 (provide-me)
 
-;;; realgud-lldb.el ends here
+;;; realgud-mobdebug.el ends here
