@@ -89,7 +89,7 @@ fringe and marginal icons.
 
 (defalias 'mobdebug 'realgud:mobdebug)
 
-(provide-me "realgud-")
+(provide-me "realgud:")
 
 ;; Local Variables:
 ;; byte-compile-warnings: (not cl-functions)

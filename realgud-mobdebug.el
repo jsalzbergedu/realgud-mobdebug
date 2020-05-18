@@ -42,7 +42,7 @@
   :group 'realgud
   :version "25.1")
 
-(require-relative-list '( "./mobdebug/mobdebug" ) "realgud-")
+(require-relative-list '( "./mobdebug/mobdebug" ) "realgud:")
 
 (provide-me)
 

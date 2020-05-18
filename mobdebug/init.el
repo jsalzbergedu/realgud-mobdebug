@@ -86,4 +86,7 @@ the debugger specific hash table, e.g. 'realugd-mobdebug-pat-hash'.")
 (setf (gethash "info-breakpoints" realgud:mobdebug-command-hash) "listb")
 (setf (gethash "restart"          realgud:mobdebug-command-hash) "reload")
 
+(setf (gethash "mobdebug" realgud-command-hash) realgud:mobdebug-command-hash)
+(setf (gethash "mobdebug" realgud-pat-hash) realgud:mobdebug-pat-hash)
+
 (provide-me "realgud:mobdebug-")

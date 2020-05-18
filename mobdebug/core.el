@@ -111,7 +111,7 @@ Note that path elements have been expanded via `expand-file-name'.
 
   ;; Parse the following kind of pattern:
   ;;  mobdebug mobdebug-options script-name script-options
-  '(nil nil nil nil))
+  '(("lua" "-e" "require('mobdebug').listen()") nil nil nil))
   ;; (let (
   ;;       (args orig-args)
   ;;       (pair)          ;; temp return from
