@@ -86,7 +86,6 @@
 					 cmd-mark directory column)
   (realgud:file-loc-from-line filename lineno
 			      cmd-mark source-str nil nil directory))
-			      ;; 'realgud:mobdebug-find-file directory))
 
 (defun realgud:mobdebug-parse-cmd-args (orig-args)
   "Parse command line ARGS for the annotate level and name of script to debug.
