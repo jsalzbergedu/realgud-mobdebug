@@ -110,7 +110,8 @@ Note that path elements have been expanded via `expand-file-name'.
 
   ;; Parse the following kind of pattern:
   ;;  mobdebug mobdebug-options script-name script-options
-  '(("lua" "-e" "require('mobdebug').listen()") nil nil nil))
+  (let ((file (nth 2 orig-args)))
+    `(("mobdebug-emacs.lua" "--") nil (,file) nil)))
   ;; (let (
   ;;       (args orig-args)
   ;;       (pair)          ;; temp return from
@@ -171,11 +172,16 @@ Note that path elements have been expanded via `expand-file-name'.
 (defun realgud:mobdebug-suggest-invocation (&optional debugger-name)
   "Suggest a mobdebug command invocation. Here is the priority we use:
 * an executable file with the name of the current buffer stripped of its extension
-* any executable file in the current directory with no extension
+* test.lua
 * the last invocation in mobdebug:minibuffer-history
-* any executable in the current directory
 When all else fails return the empty string."
-  "lua -e \"require('mobdebug').listen()\"")
+  (let* ((file-list (directory-files default-directory)))
+    (cond ((member "test.lua" file-list)
+           (format "mobdebug-emacs.lua -- %s"
+                   (expand-file-name "test.lua")))
+          (realgud:mobdebug-minibuffer-history
+           (car realgud:mobdebug-minibuffer-history))
+          (t "mobdebug-emacs.lua -- "))))
 
 (defun realgud:mobdebug-reset ()
   "Mobdebug cleanup - remove debugger's internal buffers (frame,
